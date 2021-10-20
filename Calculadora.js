@@ -54,23 +54,28 @@ function ingresarNúmeros(){
 //Operaciones matemáticas
 function sumar(){
         resultado = númeroUno+númeroDos
-        return parseFloat(resultado).toFixed(4);
+        return parseFloat(resultado.toFixed(4));
 };
 function restar(){
         resultado = númeroUno-númeroDos;
-        return parseFloat(resultado).toFixed(4);
+        return parseFloat(resultado.toFixed(4));
 };
 function multiplicar(){
         resultado = númeroUno*númeroDos;
         return resultado;
 };
 function dividir(){
+    if (númeroDos != 0){
         resultado = númeroUno/númeroDos;
-        return parseFloat(resultado).toFixed(4);
+    } else {
+        console.log("ERROR");
+        reinicio();
+    };
+        return parseFloat(resultado.toFixed(4));
 };
 function potenciar(){
         resultado = númeroUno**númeroDos;
-        return parseFloat(resultado).toFixed(4);
+        return parseFloat(resultado.toFixed(4));
 };
 
 //Reiniciar calculadora
