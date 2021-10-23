@@ -8,23 +8,33 @@ var númeroUno;
 var númeroDos;
 var resultado;
 
+var error = {
+    dividirPorCero: "error1",
+    radicacionPorCero: "error2",
+    radicacionPorCero: "error3",
+}
+
 //Calculadora
 ingresarNúmeros();
 cálculo();
 
+function ingresoNumero(tipoNumero) {
+    var aux;
+    while (isNaN(aux = parseFloat(mi_prompt(`Por favor, ingrese el ${tipoNumero} número: `)))){
+        console.log ("ERROR: No se ha ingresado un número");
+    };
+    return aux;
+}
+
 //Pedir al usuario valores numéricos
 function ingresarNúmeros(){
-    while (isNaN(númeroUno = parseFloat(prompt("Por favor, ingrese el primer número: ")))){
-        console.log ("ERROR: No se ha ingresado un número");
-    };
-    while (isNaN(númeroDos = parseFloat(prompt("Ahora ingrese el segundo número: ")))){
-        console.log ("ERROR: No se ha ingresado un número");
-    };
+    númeroUno = ingresoNumero("primero");
+    númeroDos = ingresoNumero("segundo");
 };
 
 //Selección de operación matemática
 function cálculo(){
-    var operación = prompt("¿Qué operación desea realizar? SUMA, RESTA, MULTIPLICACION, DIVISION, POTENCIACION, RADICACION: ");
+    var operación = mi_prompt("¿Qué operación desea realizar? SUMA, RESTA, MULTIPLICACION, DIVISION, POTENCIACION, RADICACION: ");
     switch(operación.toLowerCase()){
         case "suma":
             sumar();
@@ -54,22 +64,22 @@ function cálculo(){
 //Operaciones matemáticas
 function sumar(){
         resultado = númeroUno+númeroDos
-        console.log("El resultado es: " + parseFloat(resultado.toFixed(4)));
+        console.log("El resultado es: " + parseFloat(resultado.toFixed(6)));
         return resultado;
 };
 function restar(){
         resultado = númeroUno-númeroDos;
-        console.log("El resultado es: " + parseFloat(resultado.toFixed(4)));
+        console.log("El resultado es: " + parseFloat(resultado.toFixed(6)));
         return resultado;
 };
 function multiplicar(){
         resultado = númeroUno*númeroDos;
-        console.log("El resultado es: " + parseFloat(resultado.toFixed(4)));
+        console.log("El resultado es: " + parseFloat(resultado.toFixed(6)));
         return resultado;
 };
 function dividir(){
     if (númeroDos == 0){
-        console.log("ERROR");
+        console.log(error.dividirPorCero);
     } else {
         resultado = númeroUno/númeroDos;
         console.log("El resultado es: " + parseFloat(resultado.toFixed(4)));
@@ -91,9 +101,14 @@ function radicar(){
     };
 };
 
+function mi_prompt(string) {
+    console.log(string);
+    return prompt();
+}
+
 //Reiniciar calculadora
 function reinicio(){
-    var nuevaOperación = prompt("¿Ahora, qué desea realizar?\n A) Nueva operación con los mismos números\n B) Nueva operación con distintos números\n C) Salir de la calculadora\n"); 
+    var nuevaOperación = mi_prompt("¿Ahora, qué desea realizar?\n A) Nueva operación con los mismos números\n B) Nueva operación con distintos números\n C) Salir de la calculadora"); 
         if (nuevaOperación.toLowerCase() === "a"){
             cálculo();
         } else if (nuevaOperación.toLowerCase() === "b"){
@@ -106,3 +121,4 @@ function reinicio(){
             reinicio();
         };
 };
+
